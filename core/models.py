@@ -29,9 +29,7 @@ class Post(models.Model):
     titulo = models.CharField(max_length=150)
     subtitulo = models.CharField(max_length=150, blank=True)
     contenido = models.TextField()
-    imagen = models.ImageField(upload_to='posts/')
-    fecha_publicacion = models.DateTimeField(auto_now_add=True)
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    autor = models.CharField(max_length=50) 
 
     def __str__(self):
         return self.titulo

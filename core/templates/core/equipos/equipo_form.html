@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block contenido %}
+<div class="container">
+    <div class="card" style="max-width: 600px; margin: auto;">
+        <h2>{% if object %} Editar Equipo {% else %} Nuevo Equipo {% endif %}</h2>
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">
+                {% if object %} Guardar Cambios {% else %} Crear {% endif %}
+            </button>
+            <a href="{% url 'equipo_list' %}" class="btn btn--ghost">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block contenido %}
+<div class="container">
+    <div class="card" style="border: 2px solid red; max-width: 500px; margin: auto;">
+        <h2>¿Estás seguro?</h2>
+        <p>Estás a punto de borrar al equipo: <strong>{{ object.nombre }}</strong>. Esta acción no se puede deshacer.</p>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn--danger">Sí, borrar definitivamente</button>
+            <a href="{% url 'equipo_list' %}" class="btn btn--ghost">No, cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

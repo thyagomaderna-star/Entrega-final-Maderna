@@ -4,7 +4,9 @@
         
         <nav class="navbar__links">
             <a href="{% url 'inicio' %}">Inicio</a>
-            <a href="#">Buscar Usuarios</a>
+            <a href="#">Usuarios</a>
+            <a href="{% url 'equipo_list' %}">Equipos</a>
+            <a href="#">Posts</a>
             
             {% if user.is_authenticated %}
                 <a href="#">Mi Perfil</a>

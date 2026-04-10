@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% block titulo %}Lista de Equipos{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <div class="header-flex">
+        <h2>Equipos Registrados</h2>
+        <a href="{% url 'equipo_create' %}" class="btn">+ Agregar Equipo</a>
+    </div>
+
+    <div class="grid grid-3">
+        {% for equipo in equipos %}
+        <div class="card">
+            {% if equipo.escudo %}
+                <img src="{{ equipo.escudo.url }}" alt="{{ equipo.nombre }}" style="width: 50px;">
+            {% endif %}
+            <h3>{{ equipo.nombre }}</h3>
+            <p>{{ equipo.ciudad }}</p>
+            <div class="card__actions">
+                <a href="{% url 'equipo_detail' equipo.id %}" class="btn btn--small">Ver</a>
+                <a href="{% url 'equipo_update' equipo.id %}" class="btn btn--ghost btn--small">Editar</a>
+            </div>
+        </div>
+        {% empty %}
+            <p>No hay equipos cargados todavía.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

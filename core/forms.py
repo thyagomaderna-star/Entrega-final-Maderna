@@ -35,10 +35,7 @@ class BuscarEquipoForm(forms.Form):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
-        widgets = {
-            'contenido': forms.Textarea(attrs={'rows': 5}),
-        }
+        fields = ['titulo', 'subtitulo', 'contenido']
 
 class BuscarPostForm(forms.Form):
     titulo = forms.CharField(required=False, label="Título del post")
