@@ -1,0 +1,34 @@
+{% extends "core/base.html" %}
+
+{% block titulo %}Registro | Fútbol Blog{% endblock %}
+
+{% block contenido %}
+<div class="auth-page">
+    <div class="auth-card">
+        <h1 class="auth-card__title">Crear cuenta</h1>
+        <p class="auth-card__subtitle">Unite a la comunidad futbolera</p>
+
+        <form method="POST" class="form">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <small class="text-danger">{{ field.errors }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn" style="width: 100%; margin-top: var(--space-4);">
+                Registrarse
+            </button>
+        </form>
+
+        <div class="auth-card__footer">
+            ¿Ya tenés cuenta? <a href="#">Iniciá sesión</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "core/base.html" %}
+
+{% block titulo %}Inicio - Fútbol Blog{% endblock %}
+
+{% block contenido %}
+<header class="hero">
+    <h1 class="hero__title">Bienvenidos a Fútbol Blog</h1>
+    <p class="hero__subtitle">
+        El espacio donde la pasión por la redonda se hace texto. 
+        Analizá partidos, conocé equipos y compartí tu opinión.
+    </p>
+    
+    <div class="hero__actions">
+        {% if not user.is_authenticated %}
+            <a href="{% url 'register' %}" class="btn btn--ghost" >Empezar ahora</a>
+            <a href="{% url 'login' %}" class="btn btn--ghost">Iniciar sesión</a>
+        {% else %}
+            <a href="#" class="btn">Ver últimos posts</a>
+            <a href="#" class="btn btn--ghost">Ir a mi perfil</a>
+        {% endif %}
+    </div>
+</header>
+
+<section class="section">
+    <div class="grid grid-2">
+        <div class="card">
+            <h3>Comunidad</h3>
+            <p>Conectate con otros hinchas y debatí sobre la actualidad del fútbol local e internacional.</p>
+        </div>
+        <div class="card">
+            <h3>Equipos</h3>
+            <p>Explorá nuestra base de datos de equipos, su historia y sus estadísticas actualizadas.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

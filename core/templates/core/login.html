@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block titulo %}Login - Fútbol Blog{% endblock %}
+
+{% block contenido %}
+<div class="container">
+  <div class="card" style="max-width: 400px; margin: 40px auto;">
+    <h1 class="card__title">Iniciar Sesión</h1>
+    
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}  <button class="btn" type="submit" style="width: 100%;">Entrar</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
