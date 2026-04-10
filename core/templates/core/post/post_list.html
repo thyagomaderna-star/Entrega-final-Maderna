@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+
+{% block titulo %}Lista de Posts{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <div class="header-flex">
+        <h2>Posts Disponibles</h2>
+        <a href="{% url 'post_create' %}" class="btn">+ Agregar Post</a>
+    </div>
+
+    <div class="grid grid-3">
+        {% for publicacion in post %}
+        <div class="card">
+            <h3>{{ publicacion.titulo }}</h3>
+            <p>{{ publicacion.autor }}</p>
+            <div class="card__actions">
+                <a href="{% url 'post_detail' publicacion.id %}" class="btn btn--small">Ver</a>
+                <a href="{% url 'post_update' publicacion.id %}" class="btn btn--ghost btn--small">Editar</a>
+            </div>
+        </div>
+        {% empty %}
+            <p>No hay Posts cargados todavía.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

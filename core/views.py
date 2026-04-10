@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import RegistroForm, EditarPerfilForm
-from .models import Perfil, Equipo, Post
+from .forms import RegistroForm, EditarPerfilForm, AvatarForm
+from .models import Perfil, Equipo, Post, Avatar
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -52,6 +52,16 @@ def editar_perfil(request):
         formulario = EditarPerfilForm(instance=usuario)
 
     return render(request, "core/editar_perfil.html", {"mi_form": formulario})
+
+class EditarAvatarView(LoginRequiredMixin, UpdateView):
+    model = Avatar
+    form_class = AvatarForm
+    template_name = "core/perfil/avatar_form.html"
+    success_url = reverse_lazy('post_list')
+
+def get_object(self):
+        mi_avatar, created = Avatar.objects.get_or_create(user=self.request.user)
+        return mi_avatar
 
 #Equipos
 

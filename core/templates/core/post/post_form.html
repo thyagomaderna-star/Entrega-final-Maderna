@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block contenido %}
+<div class="container">
+    <div class="card">
+        <h2>{% if object %} Editar Post {% else %} Crear Nuevo Post {% endif %}</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">
+                {% if object %} Guardar Cambios {% else %} Publicar {% endif %}
+            </button>
+            <a href="{% url 'post_list' %}" class="btn btn--ghost">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

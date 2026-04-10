@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from .models import Perfil, Post, Equipo
+from .models import Perfil, Post, Equipo, Avatar
 
 #SECCIÓN USUARIOS
 
@@ -18,6 +18,14 @@ class EditarPerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = ['avatar', 'biografia', 'equipo_favorito']
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ["imagen"]
+        labels = {
+            'imagen': 'Seleccioná tu foto de perfil',
+        }
 
 # --- 2. SECCIÓN EQUIPOS ---
 

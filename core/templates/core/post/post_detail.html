@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+
+{% block contenido %}
+<div class="container">
+    <div class="card card--detail">
+        <a href="{% url 'post_list' %}">← Volver al inicio</a>
+        <br><br>
+        
+        <h1>{{ object.titulo }}</h1>
+        {% if object.subtitulo %}
+            <h3>{{ object.subtitulo }}</h3>
+        {% endif %}
+        
+        <p><small>Escrito por: <strong>{{ object.autor }}</strong></small></p>
+        <hr>
+        
+        <p>{{ object.contenido|linebreaks }}</p>
+        
+        <div style="margin-top: 30px;">
+            <a href="{% url 'post_update' object.id %}" class="btn">Editar Post</a>
+            <a href="{% url 'post_delete' object.id %}" class="btn btn--danger">Borrar Post</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
