@@ -52,4 +52,4 @@ python manage.py runserver
 
 
 🎥 Video de Demostración
-Podés ver el funcionamiento de la aplicación en el siguiente enlace:
+Podés ver el funcionamiento de la aplicación en el siguiente enlace: https://drive.google.com/file/d/1yh3ZXwaHlCKzA75tZOzK7FYTxdxgZj5W/view
