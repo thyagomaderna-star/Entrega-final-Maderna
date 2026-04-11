@@ -59,3 +59,7 @@ pipenv shell
 # Ejecutar el servidor
 python manage.py runserver
 La aplicación estará disponible en http://127.0.0.1:8000/.
+
+
+LINK VIDEO DE PRUEBA
+https://drive.google.com/file/d/1yh3ZXwaHlCKzA75tZOzK7FYTxdxgZj5W/view?usp=sharing
