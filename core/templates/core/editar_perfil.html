@@ -2,18 +2,12 @@
 
 {% block contenido %}
 <div class="container">
-    <h2>Configuración de Cuenta</h2>
+    <h2>Actualizar Mi Perfil</h2>
     
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         
-        <h3>Datos Personales</h3>
-        {{ form_user.as_p }}
-        
-        <hr>
-        
-        <h3>Sobre mí</h3>
-        {{ form_perfil.as_p }}
+        {{ form.as_p }}
         
         <button type="submit" class="btn">Guardar Cambios</button>
     </form>

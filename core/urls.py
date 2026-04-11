@@ -3,11 +3,16 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
 path('', views.inicio, name='inicio'),
 path('resgister/',views.registrar_usuario, name="register"),
 path('login/', views.login_request, name='login'),
+path('perfil/ver/', views.PerfilDetailView.as_view(), name='perfil_detail'),
+path('perfil/editar/', views.editar_perfil, name='perfil_update'),
+path('usuarios/', views.UserListView.as_view(), name='user_list'),
+path('logout/', LogoutView.as_view(template_name='core/inicio.html'), name='logout'),
 #Paths de equipos
 path('equipo/list/', views.EquipoListView.as_view(), name='equipo_list'),
 path('equipo/<int:pk>/', views.EquipoDetailView.as_view(), name='equipo_detail'),

@@ -4,13 +4,13 @@
         
         <nav class="navbar__links">
             <a href="{% url 'inicio' %}">Inicio</a>
-            <a href="#">Usuarios</a>
+            <a href="{% url 'user_list' %}">Usuarios</a>
             <a href="{% url 'equipo_list' %}">Equipos</a>
             <a href="{% url 'post_list' %}">Posts</a>
             
             {% if user.is_authenticated %}
-                <a href="#">Mi Perfil</a>
-                <form action="#" method="POST" style="display:inline;">
+                <a href="{% url 'perfil_detail' %}">Mi Perfil</a>
+                <form action="{% url 'logout' %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="btn">Salir</button>
                 </form>

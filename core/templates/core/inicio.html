@@ -15,7 +15,7 @@
             <a href="{% url 'register' %}" class="btn btn--ghost" >Empezar ahora</a>
             <a href="{% url 'login' %}" class="btn btn--ghost">Iniciar sesión</a>
         {% else %}
-            <a href="#" class="btn btn--ghost">Ir a mi perfil</a>
+            <a href="{% url 'perfil_detail' %}" class="btn btn--ghost">Ir a mi perfil</a>
         {% endif %}
     </div>
 </header>

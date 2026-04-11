@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import RegistroForm, EditarPerfilForm, AvatarForm
-from .models import Perfil, Equipo, Post, Avatar
+from .forms import RegistroForm, EditarPerfilForm
+from .models import Perfil, Equipo, Post, User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -39,40 +39,41 @@ def login_request(request):
 
 @login_required
 def editar_perfil(request):
-    usuario = request.user 
-
+    perfil, created = Perfil.objects.get_or_create(user=request.user)
     if request.method == 'POST':
-
-        formulario = EditarPerfilForm(request.POST, instance=usuario)
+        formulario = EditarPerfilForm(request.POST, request.FILES, instance=perfil)
 
         if formulario.is_valid():
             formulario.save()
             return redirect('inicio')
     else:
-        formulario = EditarPerfilForm(instance=usuario)
+        formulario = EditarPerfilForm(instance=perfil)
+    return render(request, "core/editar_perfil.html", {"form": formulario})
 
-    return render(request, "core/editar_perfil.html", {"mi_form": formulario})
+class PerfilDetailView(LoginRequiredMixin, DetailView):
+    model = Perfil
+    template_name = "core/perfil_detail.html"
+    context_object_name = "perfil"
 
-class EditarAvatarView(LoginRequiredMixin, UpdateView):
-    model = Avatar
-    form_class = AvatarForm
-    template_name = "core/perfil/avatar_form.html"
-    success_url = reverse_lazy('post_list')
+    def get_object(self):
+        perfil, created = Perfil.objects.get_or_create(user=self.request.user)
+        return perfil
 
-def get_object(self):
-        mi_avatar, created = Avatar.objects.get_or_create(user=self.request.user)
-        return mi_avatar
+class UserListView(LoginRequiredMixin,ListView):
+    model = User
+    template_name = 'core/user_list.html'
+    context_object_name = 'usuarios'
 
 #Equipos
 
 #Lista de todos los equipos
-class EquipoListView(ListView):
+class EquipoListView(LoginRequiredMixin,ListView):
     model = Equipo
     template_name = "core/equipos/equipo_list.html"
     context_object_name = "equipos"
 
 #Detalle de equipo
-class EquipoDetailView(DetailView):
+class EquipoDetailView(LoginRequiredMixin,DetailView):
     model = Equipo
     template_name = "core/equipos/equipo_detail.html"
 

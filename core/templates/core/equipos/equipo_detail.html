@@ -9,8 +9,8 @@
         {% if object.escudo %}
             <img src="{{ object.escudo.url }}" alt="Escudo">
         {% endif %}
-        <p><strong>Ciudad:</strong> {{ object.ciudad }}</p>
-        <p><strong>Año de Fundación:</strong> {{ object.fundacion }}</p>
+        <p><strong>Vicrorias:</strong> {{ object.victorias }}</p>
+        <p><strong>Año de Fundación:</strong> {{ object.año_fundacion }}</p>
         
         <div style="margin-top: 20px;">
             <a href="{% url 'equipo_update' object.id %}" class="btn">Editar</a>

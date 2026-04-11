@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+
+{% block contenido %}
+<div class="container">
+    <div class="card">
+        <div>
+            {% if perfil.avatar %}
+            <img src="{{ perfil.avatar.url }}" alt="Avatar de {{ user.username }}">
+            {% else %}
+                <div>
+                    <span>Sin foto</span>
+                </div>
+            {% endif %}
+            
+            <h1 >{{ user.first_name }} {{ user.last_name }}</h1>
+            <p>@{{ user.username }} | {{ user.email }}</p>
+        </div>
+
+        <hr>
+
+        <div>
+            <h3>Sobre mí</h3>
+            <p>{{ perfil.biografia|default:"Este usuario aún no ha escrito su biografía."|linebreaks }}</p>
+            
+            <p><strong>Fecha de nacimiento:</strong> {{ perfil.fecha_nacimiento|default:"No especificada" }}</p>
+            
+            {% if perfil.equipo_favorito %}
+                <p><strong>Equipo favorito:</strong> {{ perfil.equipo_favorito.nombre }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <a href="{% url 'perfil_update' %}" class="btn">Editar mi información</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

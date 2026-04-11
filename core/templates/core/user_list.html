@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+
+{% block contenido %}
+<div class="container">
+    <h2>Explorar Usuarios</h2>
+    
+    <div>
+        {% for usuario in usuarios %}
+            <div class="card">
+                {% if usuario.perfil.avatar %}
+                    <img src="{{ usuario.perfil.avatar.url }}">
+                {% else %}
+                    <div >
+                        <span>Sin foto</span>
+                    </div>
+                {% endif %}
+                
+                <h4>{{ usuario.username }}</h4>
+                <p>{{ usuario.first_name }} {{ usuario.last_name }}</p>
+            </div>
+        {% empty %}
+            <p>No hay usuarios registrados todavía.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

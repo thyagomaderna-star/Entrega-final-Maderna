@@ -1,7 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Perfil, Post, Equipo, Avatar
+from .models import Perfil, Post, Equipo
 
 #SECCIÓN USUARIOS
 
@@ -9,7 +9,6 @@ class RegistroForm(UserCreationForm):
     email = forms.EmailField(required=True, label="Email")
     first_name = forms.CharField(max_length=30, required=True, label="Nombre")
     last_name = forms.CharField(max_length=30, required=True, label="Apellido")
-
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
@@ -17,17 +16,9 @@ class RegistroForm(UserCreationForm):
 class EditarPerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
-        fields = ['avatar', 'biografia', 'equipo_favorito']
+        fields = ['avatar', 'biografia', 'fecha_nacimiento', 'equipo_favorito'] 
 
-class AvatarForm(forms.ModelForm):
-    class Meta:
-        model = Avatar
-        fields = ["imagen"]
-        labels = {
-            'imagen': 'Seleccioná tu foto de perfil',
-        }
-
-# --- 2. SECCIÓN EQUIPOS ---
+#SECCIÓN EQUIPOS 
 
 class EquipoForm(forms.ModelForm):
     class Meta:
@@ -38,7 +29,7 @@ class BuscarEquipoForm(forms.Form):
     nombre = forms.CharField(required=False, label="Nombre del equipo")
 
 
-# --- 3. SECCIÓN POSTS ---
+#SECCIÓN POSTS
 
 class PostForm(forms.ModelForm):
     class Meta:

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from ckeditor.fields import RichTextField
+from ckeditor.fields import RichTextField
 
 #modelo del Equipo
 class Equipo(models.Model):
@@ -16,7 +16,8 @@ class Equipo(models.Model):
 class Perfil(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-    biografia = models.CharField(max_length=250, blank=True)
+    biografia = models.TextField(blank=True)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
     equipo_favorito = models.ForeignKey(Equipo, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
@@ -28,16 +29,10 @@ class Perfil(models.Model):
 class Post(models.Model):
     titulo = models.CharField(max_length=150)
     subtitulo = models.CharField(max_length=150, blank=True)
-    contenido = models.TextField()
-    autor = models.CharField(max_length=50) 
+    contenido = RichTextField()
+    fecha = models.DateField(auto_now_add=True)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE) 
 
     def __str__(self):
         return self.titulo
 
-class Avatar(models.Model):
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="avatar")
-    imagen = models.ImageField(upload_to="avatares", null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.user.username} - {self.imagen}"
